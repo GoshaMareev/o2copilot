@@ -1,0 +1,378 @@
+{
+  "templates": [
+    {
+      "id": "function_lf_does_not_exist_ruedimaria",
+      "name": "Function LF does not exist (RUEDIMARIA)",
+      "description": "Function LF does not exist (RUEDIMARIA)",
+      "patterns": [
+        "Partner number",
+        "customer",
+        "partner function LF does not exist",
+        "RUEDIMARIA"
+      ],
+      "action": "block_no_notify",
+      "msg_file": "idoc_zablokirovan.msg",
+      "priority": 10,
+      "comment": "Блокировать IDoc БЕЗ оповещения CSA"
+    },
+    {
+      "id": "function_we_re_ag_ruedilenta",
+      "name": "Function WE/RE/AG does not exist (RUEDILENTA)",
+      "description": "Function WE/RE/AG does not exist (RUEDILENTA)",
+      "patterns": [
+        "Partner number",
+        "customer",
+        "partner function",
+        "WE",
+        "RE",
+        "AG",
+        "does not exist",
+        "RUEDILENTA"
+      ],
+      "action": "push_and_notify",
+      "msg_file": "zakaz_v_systeme.msg",
+      "priority": 10,
+      "comment": "Протолкнуть IDoc и оповестить"
+    },
+    {
+      "id": "ayu_gln_xd03",
+      "name": "Аю (GLN клиента / XD03)",
+      "description": "Аю",
+      "patterns": [
+        "GLN",
+        "клиента"
+      ],
+      "alternative_patterns": [
+        ["XD03"]
+      ],
+      "action": "block_and_notify",
+      "msg_file": "idoc_zablokirovan.msg",
+      "priority": 5,
+      "comment": "Блокировать IDoc и оповестить CSA. Низкий приоритет для избежания ложных срабатываний"
+    },
+    {
+      "id": "duplicate_po_ruedimishl",
+      "name": "Duplicate PO RUEDIMISHL",
+      "description": "Duplicate PO RUEDIMISHL",
+      "patterns": [
+        "Duplicate",
+        "PO",
+        "ship-to",
+        "RUEDIMISHL"
+      ],
+      "action": "push_and_notify",
+      "msg_file": "zakaz_v_systeme.msg",
+      "priority": 15,
+      "comment": "Протолкнуть IDoc и оповестить"
+    },
+    {
+      "id": "duplicate_po_ruedimaria",
+      "name": "Duplicate PO RUEDIMARIA",
+      "description": "Duplicate PO RUEDIMARIA",
+      "patterns": [
+        "Duplicate",
+        "PO",
+        "ship-to",
+        "RUEDIMARIA"
+      ],
+      "action": "push_and_notify",
+      "msg_file": "zakaz_v_systeme.msg",
+      "priority": 15,
+      "comment": "Протолкнуть IDoc и оповестить"
+    },
+    {
+      "id": "duplicate_po_rueditande",
+      "name": "Duplicate PO RUEDITANDE",
+      "description": "Duplicate PO RUEDITANDE",
+      "patterns": [
+        "Duplicate",
+        "PO",
+        "ship-to",
+        "RUEDITANDE"
+      ],
+      "action": "push_and_notify",
+      "msg_file": "zakaz_v_systeme.msg",
+      "priority": 15,
+      "comment": "Протолкнуть IDoc и оповестить"
+    },
+    {
+      "id": "duplicate_po_ruedix5ret",
+      "name": "Duplicate PO RUEDIX5RET",
+      "description": "Duplicate PO RUEDIX5RET",
+      "patterns": [
+        "Duplicate",
+        "PO",
+        "ship-to",
+        "RUEDIX5RET"
+      ],
+      "action": "push_and_notify",
+      "msg_file": "zakaz_v_systeme.msg",
+      "priority": 15,
+      "comment": "Протолкнуть IDoc и оповестить"
+    },
+    {
+      "id": "duplicate_po_ruediverny",
+      "name": "Duplicate PO RUEDIVERNY",
+      "description": "Duplicate PO RUEDIVERNY",
+      "patterns": [
+        "Duplicate",
+        "PO",
+        "ship-to",
+        "RUEDIVERNY"
+      ],
+      "action": "block_and_notify",
+      "msg_file": "idoc_zablokirovan.msg",
+      "priority": 15,
+      "comment": "Блокировать IDoc и оповестить CSA"
+    },
+    {
+      "id": "duplicate_po_ruedimonet",
+      "name": "Duplicate PO RUEDIMONET",
+      "description": "Duplicate PO RUEDIMONET",
+      "patterns": [
+        "Duplicate",
+        "PO",
+        "ship-to",
+        "RUEDIMONET"
+      ],
+      "action": "block_and_notify",
+      "msg_file": "idoc_zablokirovan.msg",
+      "priority": 15,
+      "comment": "Блокировать IDoc и оповестить CSA"
+    },
+    {
+      "id": "duplicate_po_ruedigiper",
+      "name": "Duplicate PO RUEDIGIPER",
+      "description": "Duplicate PO RUEDIGIPER",
+      "patterns": [
+        "Duplicate",
+        "PO",
+        "ship-to",
+        "RUEDIGIPER"
+      ],
+      "action": "block_and_notify",
+      "msg_file": "idoc_zablokirovan.msg",
+      "priority": 15,
+      "comment": "Блокировать IDoc и оповестить CSA"
+    },
+    {
+      "id": "duplicate_po_ruediausha",
+      "name": "Duplicate PO RUEDIAUSHA",
+      "description": "Duplicate PO RUEDIAUSHA",
+      "patterns": [
+        "Duplicate",
+        "PO",
+        "ship-to",
+        "RUEDIAUSHA"
+      ],
+      "action": "block_and_notify",
+      "msg_file": "idoc_zablokirovan.msg",
+      "priority": 15,
+      "comment": "Блокировать IDoc и оповестить CSA"
+    },
+    {
+      "id": "duplicate_po_ruediatak1",
+      "name": "Duplicate PO RUEDIATAK1",
+      "description": "Duplicate PO RUEDIATAK1",
+      "patterns": [
+        "Duplicate",
+        "PO",
+        "ship-to",
+        "RUEDIATAK1"
+      ],
+      "action": "block_and_notify",
+      "msg_file": "idoc_zablokirovan.msg",
+      "priority": 15,
+      "comment": "Блокировать IDoc и оповестить CSA"
+    },
+    {
+      "id": "material_is_not_defined",
+      "name": "Material is not defined",
+      "description": "Material is not defined",
+      "patterns": [
+        "Material",
+        "is not defined"
+      ],
+      "action": "block_and_notify",
+      "msg_file": "idoc_zablokirovan.msg",
+      "priority": 8,
+      "comment": "Блокировать IDoc и оповестить CSA"
+    },
+    {
+      "id": "ean_number_ruediausha",
+      "name": "EAN number RUEDIAUSHA",
+      "description": "EAN number RUEDIAUSHA",
+      "patterns": [
+        "EAN",
+        "number",
+        "cannot be converted",
+        "RUEDIAUSHA"
+      ],
+      "action": "block_and_notify",
+      "msg_file": "idoc_zablokirovan.msg",
+      "priority": 15,
+      "comment": "Блокировать IDoc и оповестить CSA"
+    },
+    {
+      "id": "ean_number_ruediatak1",
+      "name": "EAN number RUEDIATAK1",
+      "description": "EAN number RUEDIATAK1",
+      "patterns": [
+        "EAN",
+        "number",
+        "cannot be converted",
+        "RUEDIATAK1"
+      ],
+      "action": "block_and_notify",
+      "msg_file": "idoc_zablokirovan.msg",
+      "priority": 15,
+      "comment": "Блокировать IDoc и оповестить CSA"
+    },
+    {
+      "id": "idoc_po_number",
+      "name": "IDoc с номером заказа",
+      "description": "IDoc с номером заказа",
+      "patterns": [
+        "IDoc",
+        "номером заказа",
+        "PO"
+      ],
+      "action": "block_and_notify",
+      "msg_file": "idoc_zablokirovan.msg",
+      "priority": 8,
+      "comment": "Блокировать IDoc и оповестить CSA"
+    },
+    {
+      "id": "ru3a01_ruedimaksi",
+      "name": "Корректно размещение заказов RU3A-01 (RUEDIMAKSI)",
+      "description": "Корректно размещение заказов RU3A-01",
+      "patterns": [
+        "клиента",
+        "RUEDIMAKSI",
+        "корректно",
+        "размещение",
+        "заказов",
+        "RU3A-01",
+        "GLN",
+        "сегменте LF"
+      ],
+      "action": "push_and_notify",
+      "msg_file": "zakaz_v_systeme.msg",
+      "priority": 20,
+      "comment": "Протолкнуть IDoc и оповестить. Высокий приоритет - специфичный запрос"
+    },
+    {
+      "id": "ru3c01_gln",
+      "name": "Корректно размещение заказов RU3С-01 с указанием общего GLN",
+      "description": "Корректно размещение заказов RU3С-01",
+      "patterns": [
+        "корректно",
+        "размещение",
+        "заказов",
+        "RU3С-01",
+        "общего GLN"
+      ],
+      "action": "block_and_notify",
+      "msg_file": "idoc_zablokirovan.msg",
+      "priority": 15,
+      "comment": "Блокировать IDoc и оповестить CSA"
+    },
+    {
+      "id": "material_4600680008844_not_defined",
+      "name": "Material 4600680008844 is not defined",
+      "description": "Material 4600680008844 is not defined",
+      "patterns": [
+        "Material",
+        "4600680008844",
+        "is not defined"
+      ],
+      "action": "push_and_notify",
+      "msg_file": "zakaz_v_systeme.msg",
+      "priority": 15,
+      "comment": "Протолкнуть IDoc и оповестить"
+    },
+    {
+      "id": "ean_4600680008844_cannot_be_converted",
+      "name": "EAN number 4600680008844 cannot be converted",
+      "description": "EAN number 4600680008844 cannot be converted",
+      "patterns": [
+        "EAN",
+        "number",
+        "4600680008844",
+        "cannot be converted"
+      ],
+      "action": "push_and_notify",
+      "msg_file": "zakaz_v_systeme.msg",
+      "priority": 15,
+      "comment": "Протолкнуть IDoc и оповестить"
+    },
+    {
+      "id": "item_does_not_exist",
+      "name": "Item does not exist",
+      "description": "Item does not exist",
+      "patterns": [
+        "Item",
+        "does not exist"
+      ],
+      "action": "block_and_notify",
+      "msg_file": "idoc_zablokirovan.msg",
+      "priority": 8,
+      "comment": "Блокировать IDoc и оповестить CSA"
+    },
+    {
+      "id": "value_for_material_exceeded",
+      "name": "Value for material is exceeded",
+      "description": "Value for material is exceeded",
+      "patterns": [
+        "Value for material",
+        "is exceeded"
+      ],
+      "action": "block_and_notify",
+      "msg_file": "idoc_zablokirovan.msg",
+      "priority": 8,
+      "comment": "Блокировать IDoc и оповестить CSA"
+    },
+    {
+      "id": "partner_not_authorized",
+      "name": "Partner is not authorized to release from contract",
+      "description": "Partner is not authorized to release from contract",
+      "patterns": [
+        "Partner",
+        "is not authorized",
+        "release from contract"
+      ],
+      "action": "block_and_notify",
+      "msg_file": "idoc_zablokirovan.msg",
+      "priority": 8,
+      "comment": "Блокировать IDoc и оповестить CSA"
+    }
+  ],
+  "actions": {
+    "block_and_notify": {
+      "display_name": "Блокировать IDoc и оповестить CSA",
+      "icon": "⚠️",
+      "notify_csa": true
+    },
+    "block_no_notify": {
+      "display_name": "Блокировать IDoc БЕЗ оповещения CSA",
+      "icon": "⚠️",
+      "notify_csa": false
+    },
+    "push_and_notify": {
+      "display_name": "Протолкнуть IDoc и оповестить",
+      "icon": "✅",
+      "notify_csa": true
+    },
+    "lenta_gln_change": {
+      "display_name": "Замена GLN для Ленты",
+      "icon": "🏪",
+      "notify_csa": true
+    }
+  },
+  "config": {
+    "msg_folder": "templates/errors",
+    "search_mode": "priority_weighted",
+    "min_match_threshold": 0.6,
+    "comment": "priority - чем выше число, тем выше приоритет при одинаковом количестве совпадений"
+  }
+}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>O2Copilot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+</head>
+
+<body>
+    <!-- Модальное окно с правилами -->
+    <div id="rulesModal" class="modal">
+        <div class="modal-content">
+            <h3>Как получить корректную информацию из процедур при помощи нейросети</h3>
+            <div class="rules-text">
+                <ol>
+                    <li><b>Как правильно задать вопрос:</b>
+                        <ul>
+                            <li>Кратко опишите контекст, цель и ограничения. Если в вопросе <u>используется название
+                                    компании</u>, для которой есть <b>карточка клиента</b> (например, «Лента»), ответ
+                                будет сформирован
+                                <b><u>только на основании</u></b> информации из <u>этой карточки</u>.
+                            </li>
+                            <li><span style="color: green;">(не обязательно)</span> Укажите <b>формат ответа: список,
+                                    таблица, план и т.д.</b> Примеры: «Что необходимо для загрузки внепрайсового заказа
+                                для дистрибьютеров?», «срок выставления претензии х5».
+                            </li>
+                        </ul>
+                    </li>
+                    <li><b>Оцените точность</b>
+                        <ul>
+                            <li>При точности ответа ниже 10 — задайте уточняющие вопросы или альтернативные варианты или
+                                перейдите по ссылке в источник.</li>
+                            <b>ВАЖНО! </b>O2Copilot <b>не запоминает контекст</b>, поэтому уточняющие вопросы
+                            будут восприняты как полностью новые. Учитывайте это в формулировках​.
+                            <li>При <b>переформулировании</b> ответа попробуйте добавить важные <b>ключевые слова</b>
+                                и/или подробнее описать задачу. Корпоративный слэнг («вб» вместо «Wildberries»,
+                                «джелэен» вместо «GLN» и т.п.)
+                                по большей части поддерживается, но также может стать источником проблем.</li>
+                        </ul>
+                    </li>
+                    <li><b>Если получен неверный ответ:</b>
+                        <ul>
+                            <li>Попробуйте переформулировать вопрос​.</li>
+                            <li>Если ошибка критическая или требуется, чтобы нейросеть распознавала дополнительные
+                                синонимы,
+                                напишите на адреса:
+                                <a
+                                    href="mailto:Iana.Efimova@nestle.ru?subject=Вопрос по O2Copilot">iana.efimova@nestle.ru</a>,
+                                <a
+                                    href="mailto:Andrey.Shulpin@nestle.ru?subject=Вопрос по O2Copilot">andrey.shulpin@nestle.ru</a>.
+                            </li>
+                        </ul><br>
+                        <b>Все ответы нейросети носят рекомендательный характер, ответственность за принятием решения
+                            сохраняется за сотрудником.</b>
+                    </li>
+                </ol>
+            </div>
+            <div class="modal-footer"><button id="acceptRulesBtn" class="accept-button">Ознакомлен</button></div>
+        </div>
+    </div>
+
+    <div id="sidebar">
+        <!-- <p><br><br></p> -->
+        <h3>Выбор датасетов</h3>
+
+        <label class="dataset-option">
+            <input type="checkbox" class="ds" value="o2c">
+            <span>O2C</span>
+        </label>
+
+        <label class="dataset-option">
+            <input type="checkbox" class="ds ds-parent" value="r2r">
+            <span>R2R</span>
+        </label>
+
+        <div class="dataset-children">
+            <label class="dataset-option">
+                <input type="checkbox" class="ds ds-child" data-parent="r2r" value="ru">
+                <span>RU</span>
+            </label>
+
+            <label class="dataset-option">
+                <input type="checkbox" class="ds ds-child" data-parent="r2r" value="kz">
+                <span>KZ</span>
+            </label>
+
+            <label class="dataset-option">
+                <input type="checkbox" class="ds ds-child" data-parent="r2r" value="uz">
+                <span>UZ</span>
+            </label>
+        </div>
+
+        <button id="ds_all" class="dataset-btn">Выбрать всё</button>
+
+        <!-- Переключатель режимов -->
+        <div class="toggle-switch">
+            <label class="toggle-title">Режим написания письма</label>
+            <label class="switch">
+                <input type="checkbox" id="letterMode">
+                <span class="slider round"></span>
+            </label>
+            <div class="toggle-tooltip">Создаст готовый шаблон письма для Outlook</div>
+        </div>
+    </div>
+
+    <button id="sidebar-toggle">≡</button>
+
+    <div class="chat-container">
+        <!-- Контейнер с фоновыми элементами -->
+        <div class="background-layer">
+            <img src="{{ url_for('static', filename='background.png') }}" alt="Фон" class="bg-base">
+            <img src="{{ url_for('static', filename='cloud1.png') }}" alt="Облако 1" class="cloud cloud1">
+            <img src="{{ url_for('static', filename='cloud2.png') }}" alt="Облако 2" class="cloud cloud2">
+            <img src="{{ url_for('static', filename='cloud3.png') }}" alt="Облако 3" class="cloud cloud3">
+            <img src="{{ url_for('static', filename='cloud4.png') }}" alt="Облако 4" class="cloud cloud4">
+            <img src="{{ url_for('static', filename='left_branch_1.png') }}" alt="Ветка слева 1"
+                class="branch left-branch left-branch-1">
+            <img src="{{ url_for('static', filename='left_branch_2.png') }}" alt="Ветка слева 2"
+                class="branch left-branch left-branch-2">
+            <img src="{{ url_for('static', filename='right_leaf.png') }}" alt="Лист справа" class="leaf right-leaf">
+            <img src="{{ url_for('static', filename='right_branch.png') }}" alt="Ветка справа"
+                class="branch right-branch">
+            <img src="{{ url_for('static', filename='nest.png') }}" alt="Логотип" class="logo nest">
+        </div>
+
+        <!-- Окно сообщений -->
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="loading-text" id="loadingText">Генерация ответа</div>
+
+        <!-- Поле ввода -->
+        <div class="chat-input-container">
+            <div class="chat-input">
+                <textarea id="userInput" placeholder="Введите ваш вопрос..."></textarea>
+            </div>
+        </div>
+
+        <button class="clear-button" onclick="clearChat()">Очистить историю</button>
+    </div>
+
+    <script src="/static/scripts.js"></script>
+</body>
+
+</html>

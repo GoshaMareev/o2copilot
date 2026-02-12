@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>O2Copilot Usage</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .card {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 6px;
+            font-size: 14px;
+        }
+
+        th {
+            background: #f3f3f3;
+        }
+
+        .btn {
+            padding: 10px 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Дашборд использования</h2>
+
+    <div class="grid">
+        <div class="card"><b>Запросы (день)</b>
+            <div id="req_day"></div>
+        </div>
+        <div class="card"><b>Запросы (неделя)</b>
+            <div id="req_week"></div>
+        </div>
+        <div class="card"><b>Запросы (месяц)</b>
+            <div id="req_month"></div>
+        </div>
+        <div class="card"><b>Запросы (всего)</b>
+            <div id="req_all"></div>
+        </div>
+
+        <div class="card"><b>Сессии (день)</b>
+            <div id="sess_day"></div>
+        </div>
+        <div class="card"><b>Сессии (неделя)</b>
+            <div id="sess_week"></div>
+        </div>
+        <div class="card"><b>Сессии (месяц)</b>
+            <div id="sess_month"></div>
+        </div>
+        <div class="card"><b>Сессии (всего)</b>
+            <div id="sess_all"></div>
+        </div>
+
+        <div class="card"><b>% сессий с сообщениями</b>
+            <div id="percent"></div>
+        </div>
+    </div>
+
+    <h3>10 последних запросов</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Время</th>
+                <th>Session ID</th>
+                <th>Текст</th>
+            </tr>
+        </thead>
+        <tbody id="last_messages"></tbody>
+    </table>
+
+    <br>
+    <button class="btn" onclick="downloadExcel()">Скачать Excel</button>
+
+    <canvas id="chart" height="80"></canvas>
+
+    <script>
+        async function loadStats() {
+            const r = await fetch("/stats/data");
+            const d = await r.json();
+
+            req_day.innerText = d.requests.day;
+            req_week.innerText = d.requests.week;
+            req_month.innerText = d.requests.month;
+            req_all.innerText = d.requests.all;
+
+            sess_day.innerText = d.sessions.day;
+            sess_week.innerText = d.sessions.week;
+            sess_month.innerText = d.sessions.month;
+            sess_all.innerText = d.sessions.all;
+
+            percent.innerText = d.percent_sessions_with_messages + "%";
+
+            const tbody = document.getElementById("last_messages");
+            tbody.innerHTML = "";
+            d.last_messages.forEach(r => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+      <td>${r.timestamp}</td>
+      <td>${r.session_id}</td>
+      <td>${r.query_text || ""}</td>
+    `;
+                tbody.appendChild(tr);
+            });
+
+            const ctx = document.getElementById("chart");
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: ["День", "Неделя", "Месяц"],
+                    datasets: [{
+                        label: "Запросы",
+                        data: [d.requests.day, d.requests.week, d.requests.month],
+                    }]
+                }
+            });
+        }
+
+        function downloadExcel() {
+            window.location = "/stats.xlsx";
+        }
+
+        loadStats();
+    </script>
+
+</body>
+
+</html>
